@@ -1,0 +1,137 @@
+﻿@model List<HR_Management_System.Models.Task>
+
+@{
+    ViewData["Title"] = "View Tasks";
+    Layout = "~/Views/Shared/Manger.cshtml"; 
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2><i class="fas fa-tasks"></i> Assigned Tasks</h2>
+        </div>
+        <div class="card-body">
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success text-center">
+                    <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger text-center">
+                    <i class="fas fa-exclamation-triangle"></i> @TempData["ErrorMessage"]
+                </div>
+            }
+
+            <table class="table table-hover table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in Model)
+                    {
+                        <tr>
+                            <td>@task.Title</td>
+                            <td>@task.Description</td>
+                            <td>
+                                @if (task.Status == "Done")
+                                {
+                                    <span class="badge bg-success p-2"><i class="fas fa-check"></i> Done</span>
+                                }
+                                else if (task.Status == "Doing")
+                                {
+                                    <span class="badge bg-warning p-2"><i class="fas fa-spinner"></i> Doing</span>
+                                }
+                            </td>
+                            <td>
+                                <!-- زر تعديل -->
+                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editTaskModal-@task.Id">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+
+                                <!-- زر حذف -->
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteTaskModal-@task.Id">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ مودال تعديل المهمة -->
+@foreach (var task in Model)
+{
+    <div class="modal fade" id="editTaskModal-@task.Id" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title"><i class="fas fa-edit"></i> Edit Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="EditTask" method="post">
+                        <input type="hidden" name="Id" value="@task.Id" />
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" name="Title" class="form-control" value="@task.Title" required />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Description</label>
+                            <textarea name="Description" class="form-control" required>@task.Description</textarea>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Status</label>
+                            <select name="Status" class="form-control">
+                                <option value="Done" selected="@(task.Status == "Done" ? "selected" : null)">Done</option>
+                                <option value="Doing" selected="@(task.Status == "Doing" ? "selected" : null)">Doing</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3 w-100">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- ✅ مودال تأكيد الحذف -->
+@foreach (var task in Model)
+{
+    <div class="modal fade" id="deleteTaskModal-@task.Id" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Are you sure you want to delete the task <strong>@task.Title</strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form asp-action="DeleteTask" method="post">
+                        <input type="hidden" name="id" value="@task.Id" />
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Yes, Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- ✅ تضمين Bootstrap إذا لم يكن موجودًا -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/Manger.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="d-flex">
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Topbar with Hamburger Menu for small screens -->
+            <header class="topbar d-md-none">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+                    <span class="navbar-toggler-icon">☰</span>
+                </button>
+                <div class="user-menu">
+                    <div class="user-profile">
+                        <img src="~/img/@Context.Session.GetString("ProfileImage")" alt="User">
+                        <span>@Context.Session.GetString("Name") <small>Employee</small></span>
+                    </div>
+                </div>
+            </header>
+
+            <br />
+            <!-- Content Area -->
+            <main class="content p-4">
+                <h2 class="fw-bold" style="text-align:center;">
+                    <i class="fas fa-chart-line"></i> Dashboard Manager
+                </h2>
+
+                <br />
+
+                <div class="row w-100 d-flex justify-content-center align-items-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-lg border-0 rounded-lg card-hover">
+                            <div class="card-body text-center">
+                                <h4 class="fw-bold text-primary"><i class="fas fa-tasks"></i> Total Tasks</h4>
+                                <h3 class="fw-bold text-primary">@ViewBag.TotalTasks</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-lg border-0 rounded-lg card-hover">
+                            <div class="card-body text-center">
+                                <h4 class="fw-bold text-danger"><i class="fas fa-calendar-times"></i> Total Absences</h4>
+                                <h3 class="fw-bold text-danger">@ViewBag.TotalAbsences</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-lg border-0 rounded-lg card-hover">
+                            <div class="card-body text-center">
+                                <h4 class="fw-bold text-warning"><i class="fas fa-plane-departure"></i> Total Leaves</h4>
+                                <h3 class="fw-bold text-warning">@ViewBag.TotalLeaves</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-lg border-0 rounded-lg card-hover">
+                            <div class="card-body text-center">
+                                <h4 class="fw-bold text-success"><i class="fas fa-users"></i> Total Employees</h4>
+                                <h3 class="fw-bold text-success">@ViewBag.TotalEmployees</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-lg border-0 rounded-lg card-hover">
+                            <div class="card-body text-center">
+                                <h4 class="fw-bold text-info"><i class="fas fa-building"></i> Total Departments</h4>
+                                <h3 class="fw-bold text-info">@ViewBag.TotalDepartments</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+    /* Main Content */
+    .main-content {
+        margin-left: 250px;
+        padding-top: 20px;
+        width: calc(100% - 250px);
+        background-color: #ecf0f1;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: #34495e;
+    }
+
+    /* Card Styling */
+    .card {
+        transition: transform 0.3s ease;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+
+    .card h4 {
+        font-size: 1.25rem;
+    }
+
+    .card h3 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .row {
+        margin-bottom: 20px;
+    }
+
+    .col-md-4, .col-md-6 {
+        padding: 0 15px;
+    }
+
+    /* Centering the cards */
+    .main-content .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .main-content .col-md-4, .main-content .col-md-6 {
+        flex: 0 0 auto;
+        margin: 10px;
+    }
+
+   
+</style>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+    document.querySelector('.close-sidebar').addEventListener('click', function() {
+        document.querySelector('.sidebar').classList.remove('show');
+    });
+    $(window).on('resize', function() {
+        if ($(window).width() >= 768) {
+            $('#sidebar').addClass('show');
+        } else {
+            $('#sidebar').removeClass('show');
+        }
+    });
+</script>

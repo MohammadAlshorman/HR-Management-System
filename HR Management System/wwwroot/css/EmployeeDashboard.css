@@ -1,0 +1,251 @@
+﻿/* Content */
+.content {
+    margin: 10px;
+}
+
+.Tasks {
+    display: flex;
+    gap: 15px;
+}
+
+    .Tasks .card {
+        flex-direction: row;
+        background: white;
+        padding: 20px 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 395px;
+        text-align: left;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+        .Tasks .card h3 {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .Tasks .card .value {
+            font-size: 22px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .Tasks .card .change {
+            font-size: 12px;
+            color: #28a745;
+            margin-top: 5px;
+        }
+
+        .Tasks .card .icon {
+            margin: 20px 0px;
+            font-size: 24px;
+            color: #FF497C;
+            background-color: #FEACC3;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .Tasks .card:nth-child(2) .icon {
+            width: 48px;
+            height: 48px;
+            padding: 6px;
+            color: #EF9120;
+            background-color: #F2D0A7;
+        }
+
+        .Tasks .card:nth-child(3) .icon {
+            padding: 8px;
+            font-size: 32px;
+            color: #2182BF;
+            background-color: #9CD9FF;
+        }
+
+
+/***********************************/
+.flex {
+    display: flex;
+    gap: 20px;
+    flex-direction: row !important;
+    justify-content: space-around;
+}
+.Attendance .card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 595px;
+}
+
+    .Attendance .card h2 {
+        color: #f58220;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .Attendance .card p {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        margin: 5px 0;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+
+        .Attendance .card p:last-child {
+            border-bottom: none;
+        }
+
+.Attendance .value {
+    font-weight: bold;
+}
+
+
+/***************************************************/
+.attendance-section .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    width: 1210px;
+    max-width: 1210px;
+    margin: 0px auto;
+    padding: 20px 20px;
+    
+}
+
+    .attendance-section .card .flex {
+        gap: 10px;
+    }
+
+.attendance-section .card h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.attendance-section .card h2 strong {
+    font-weight: bold;
+}
+
+.attendance-grid {
+    display: flex;
+    align-items: start;
+    margin-top: 20px;
+    justify-content: flex-start;
+    gap:130px;
+}
+
+.attendance-box {
+    text-align: start;
+    width: 120px;
+}
+
+    .attendance-box img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .attendance-box div {
+        align-items: start;
+    }
+
+    .days {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin: 5px 0;
+    }
+
+.status {
+    font-size: 10px;
+    color: #666;
+    white-space: nowrap;
+}
+/*
+.present {
+    color: green;
+}
+
+.absent {
+    color: red;
+}
+
+.leave {
+    color: blue;
+}
+
+.hours {
+    color: orange;
+}
+
+.late {
+    color: darkred;
+}*/
+
+
+@media (max-width: 768px) {
+    .Tasks {
+        flex-direction: column;
+        margin: auto;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+    .attendance-section .card {
+        width: 400px;
+    }
+    .attendance-grid {
+        flex-direction: column;
+    }
+}
+
+
+
+/***********************************************/
+
+.evaluation-card {
+    text-align: left;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    margin: 25px 5px;
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.progress-bar {
+    width: 100%;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.progress {
+    height: 100%;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+}
+
+    .progress.excellent {
+        background: #28a745;
+    }
+    /* Green */
+    .progress.very-good {
+        background: #007bff;
+    }
+    /* Blue */
+    .progress.good {
+        background: #ff9800;
+    }
+    /* Orange */
+    .progress.poor {
+        background: #dc3545;
+    }
+/* Red */

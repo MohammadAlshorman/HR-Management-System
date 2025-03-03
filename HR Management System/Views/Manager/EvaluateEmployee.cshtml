@@ -1,0 +1,103 @@
+﻿@model HR_Management_System.Models.Evaluation
+@using HR_Management_System.Models
+
+@{
+    ViewData["Title"] = "Employee Evaluation";
+    Layout = "~/Views/Shared/Manger.cshtml";
+
+    var employees = ViewBag.Employees as List<Employee>;
+
+    var questions = new List<string>
+    {
+        "Work Quality",
+        "Communication Skills",
+        "Punctuality",
+        "Teamwork",
+        "Problem Solving",
+        "Creativity",
+        "Technical Knowledge",
+        "Leadership",
+        "Adaptability",
+        "Efficiency"
+    };
+
+    var statusOptions = new Dictionary<int, string>
+    {
+        { 5, "Excellent" },
+        { 4, "Very Good" },
+        { 3, "Good" },
+        { 2, "Fair" },
+        { 1, "Bad" }
+    
+    };
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded">
+        <div class="card-header text-white text-center py-4" style="background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);">
+            <h2 class="fw-bold"><i class="fas fa-star"></i> Employee Evaluation Form</h2>
+            <p class="mb-0">Please complete all required fields.</p>
+        </div>
+
+        <div class="card-body p-4">
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show text-center shadow-sm" role="alert">
+                    <i class="fas fa-check-circle"></i> @ViewBag.SuccessMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show text-center shadow-sm" role="alert">
+                    <i class="fas fa-exclamation-circle"></i> @ViewBag.ErrorMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <form asp-action="EvaluateEmployee" method="post">
+                <!-- اختيار الموظف -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold"><i class="fas fa-user"></i> Select Employee</label>
+                    <select asp-for="EmployeeId" class="form-select border-primary shadow-sm rounded" required>
+                        <option value="">-- Select Employee --</option>
+                        @foreach (var emp in employees)
+                        {
+                            <option value="@emp.Id">@emp.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <h5 class="text-center fw-bold text-primary mb-4">Evaluation Criteria</h5>
+
+                @for (int i = 0; i < questions.Count; i++)
+                {
+                    <div class="mb-4 p-4 bg-light rounded shadow-sm">
+                        <label class="form-label fw-bold text-dark">@questions[i]</label>
+                        <div class="d-flex flex-wrap gap-3 mt-2">
+                            @foreach (var option in statusOptions)
+                            {
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="Scores[@i]" value="@option.Key" required>
+                                    <label class="form-check-label btn btn-outline-primary px-3 py-1">@option.Value</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <hr class="mb-4">
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg px-5 shadow-sm rounded-pill" style="transition: 0.3s;">
+                        <i class="fas fa-paper-plane"></i> Submit Evaluation
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- تضمين FontAwesome للأيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

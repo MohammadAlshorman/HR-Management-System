@@ -1,0 +1,85 @@
+﻿@model HR_Management_System.Models.Manager
+
+@{
+    ViewData["Title"] = "Create Manager";
+    Layout = "_LayoutHR";
+}
+<br />
+<br />
+
+
+<h1 class="text-center" style="color: #FF497C; font-weight: bold; font-size: 3rem;">Create Manager</h1>
+<h4 class="text-center mb-5" style="color: #FF497C; font-weight: 500;">Please fill in the details below</h4>
+<hr style="border-top: 3px solid #FF497C;" />
+<br />
+<br />
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form asp-action="CreateManeger" class="p-5 shadow-lg rounded" style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+            <!-- Name Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Name" class="control-label" style="color: #FF497C; font-weight: 600;">Manager's Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Manager Name"
+                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Email" class="control-label" style="color: #FF497C; font-weight: 600;">Email Address</label>
+                <input asp-for="Email" class="form-control" placeholder="Enter Email"
+                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group mb-4">
+                <label asp-for="PasswordHash" class="control-label" style="color: #FF497C; font-weight: 600;">Password</label>
+                <input type="password" asp-for="PasswordHash" class="form-control" placeholder="Enter Password"
+                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+
+            <!-- Profile Image Field -->
+            <div class="form-group mb-4">
+                <label asp-for="ProfileImage" class="control-label" style="color: #FF497C; font-weight: 600;">Profile Image</label>
+                <input asp-for="ProfileImage" class="form-control" placeholder="Upload Profile Image"
+                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+            </div>
+
+            <!-- Address Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Address" class="control-label" style="color: #FF497C; font-weight: 600;">Address</label>
+                <input asp-for="Address" class="form-control" placeholder="Enter Manager's Address"
+                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <!-- Department Dropdown -->
+            <div class="form-group mb-4">
+                <label asp-for="Department" class="control-label" style="color: #FF497C; font-weight: 600;">Department</label>
+                <select asp-for="Department" class="form-control" name="Dep" asp-items="ViewBag.Department"
+                        style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px;">
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group mt-4">
+                <input type="submit" value="Create" class="btn btn-lg w-100"
+                       style="background-color: #FF497C; color: white; border-radius: 8px; padding: 14px 0; font-weight: 600; transition: background-color 0.3s ease;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

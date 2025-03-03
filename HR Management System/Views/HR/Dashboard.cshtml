@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "HR Dashboard";
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+<h1 class="text-center" style="color: #FF497C; font-weight: bold; font-size: 2.5rem;">HR Dashboard</h1>
+
+<div class="row mb-4">
+    <!-- إجمالي الموظفين -->
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg rounded">
+            <div class="card-header text-center" style="background-color: #FF497C; color: white;">
+                <h5>Total Employees</h5>
+            </div>
+            <div class="card-body text-center">
+                <h2 style="color: #FF497C;">@ViewData["TotalEmployees"]</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- إجمالي المديرين -->
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg rounded">
+            <div class="card-header text-center" style="background-color: #FF497C; color: white;">
+                <h5>Total Managers</h5>
+            </div>
+            <div class="card-body text-center">
+                <h2 style="color: #FF497C;">@ViewData["TotalManagers"]</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- الإجازات المعلقة -->
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg rounded">
+            <div class="card-header text-center" style="background-color: #FF497C; color: white;">
+                <h5>Pending Vacations</h5>
+            </div>
+            <div class="card-body text-center">
+                <h2 style="color: #FF497C;">@ViewData["PendingVacations"]</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- إجمالي الأقسام -->
+    <div class="col-md-3 mb-3">
+        <div class="card shadow-lg rounded">
+            <div class="card-header text-center" style="background-color: #FF497C; color: white;">
+                <h5>Total Departments</h5>
+            </div>
+            <div class="card-body text-center">
+                <h2 style="color: #FF497C;">@ViewData["TotalDepartments"]</h2>
+            </div>
+        </div>
+    </div>
+</div>

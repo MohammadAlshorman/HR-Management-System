@@ -1,0 +1,103 @@
+﻿@model List<HR_Management_System.Models.LeaveRequest>
+
+@{
+    Layout = "~/Views/Shared/Manger.cshtml";
+
+    ViewData["Title"] = "Leave Requests for " + ViewBag.EmployeeName;
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2><i class="fas fa-calendar-alt"></i> Leave Requests for @ViewBag.EmployeeName</h2>
+        </div>
+        <div class="card-body">
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div id="successMessage" class="alert alert-success alert-dismissible fade show text-center">
+                    <i class="fas fa-check-circle"></i> @ViewBag.SuccessMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div id="errorMessage" class="alert alert-danger alert-dismissible fade show text-center">
+                    <i class="fas fa-exclamation-triangle"></i> @ViewBag.ErrorMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <table class="table table-striped table-hover table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th><i class="fas fa-comment"></i> Reason</th>
+                        <th><i class="fas fa-clock"></i> Start Time</th>
+                        <th><i class="fas fa-clock"></i> End Time</th>
+                        <th><i class="fas fa-info-circle"></i> Status</th>
+                        <th><i class="fas fa-cogs"></i> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var leave in Model)
+                    {
+                        <tr>
+                            <td>@leave.Reason</td>
+                            <td>@leave.StartTime?.ToString("HH:mm")</td>
+                            <td>@leave.EndTime?.ToString("HH:mm")</td>
+                            <td>
+                                <span class="badge
+                                    @(leave.Status == "Pending" ? "bg-warning text-dark" :
+                                      leave.Status == "Approved" ? "bg-success" : "bg-danger")">
+                                    @leave.Status
+                                </span>
+                            </td>
+                            <td>
+                                @if (leave.Status == "Pending")
+                                {
+                                    <form method="post" asp-action="ApproveLeave" asp-controller="Manager" class="d-inline">
+                                        <input type="hidden" name="id" value="@leave.Id" />
+                                        <input type="hidden" name="employeeId" value="@ViewBag.EmployeeId" />
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check"></i> Approve
+                                        </button>
+                                    </form>
+
+                                    <form method="post" asp-action="RejectLeave" asp-controller="Manager" class="d-inline">
+                                        <input type="hidden" name="id" value="@leave.Id" />
+                                        <input type="hidden" name="employeeId" value="@ViewBag.EmployeeId" />
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-times"></i> Reject
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        var successAlert = document.getElementById("successMessage");
+        var errorAlert = document.getElementById("errorMessage");
+
+        if (successAlert) {
+            successAlert.style.transition = "opacity 0.5s";
+            successAlert.style.opacity = "0";
+            setTimeout(() => successAlert.remove(), 500);
+        }
+
+        if (errorAlert) {
+            errorAlert.style.transition = "opacity 0.5s";
+            errorAlert.style.opacity = "0";
+            setTimeout(() => errorAlert.remove(), 500);
+        }
+    }, 3000);
+</script>
+
+<!-- تضمين FontAwesome للأيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

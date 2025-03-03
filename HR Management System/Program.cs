@@ -1,7 +1,28 @@
+﻿using HR_Management_System.Models;
+using HR_Management_System.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<HrmanagementSystemContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnectionString")));
+
+
+//  (Session)
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+
+
+builder.Services.AddScoped<EmailService>();
+
 
 var app = builder.Build();
 
@@ -17,7 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

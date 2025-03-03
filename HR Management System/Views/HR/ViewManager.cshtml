@@ -1,0 +1,59 @@
+﻿@model IEnumerable<HR_Management_System.Models.Manager>
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_LayoutHR";
+}
+<br />
+
+
+<h1 class="text-center" style="color: #FF497C; font-weight: bold; font-size: 2.5rem; margin-top: 30px;">View Manager</h1>
+<br />
+<br />
+
+<p class="text-center mb-4">
+    <a asp-action="CreateManeger" class="btn btn-dark btn-lg" style="background-color: #FF497C; color: white; padding: 12px 25px; font-weight: bold;">
+        Add New Manager
+    </a>
+</p>
+
+<div class="row" style="margin-left: 10px; margin-right: 10px;">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4" style="margin-bottom: 20px;">
+            <div class="card shadow-lg rounded" style="border: 1px solid #FF497C; margin: 10px;">
+                <div class="card-header text-center" style="background-color: #FF497C; color: white; font-weight: bold;">
+                    @item.Name
+                </div>
+                <div class="card-body">
+                 @*    <div class="text-center mb-3">
+                        @if (!string.IsNullOrEmpty(item.ProfileImage))
+                        {
+                            <img src="@item.ProfileImage" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <span>No Image</span>
+                        }
+                    </div> *@
+
+                    <div class="mb-2">
+                        <p><strong>Email:</strong> @item.Email</p>
+                        <p><strong>Address:</strong> @item.Address</p>
+                        <p><strong>Created At:</strong> @item.CreatedAt</p>
+                        <p><strong>Department:</strong> @item.Department.Name</p>
+                    </div>
+                </div>
+            @*     <div class="card-footer text-center">
+                    <!-- Add more actions if necessary, like Edit and Delete -->
+                    <a asp-action="EditManager" asp-route-id="@item.Id" class="btn btn-warning btn-sm" style="border-radius: 6px; padding: 6px 12px;">
+                        Edit
+                    </a>
+                    <a asp-action="DeleteManager" asp-route-id="@item.Id" class="btn btn-danger btn-sm" style="border-radius: 6px; padding: 6px 12px;">
+                        Delete
+                    </a>
+                </div> *@
+            </div>
+        </div>
+    }
+</div>

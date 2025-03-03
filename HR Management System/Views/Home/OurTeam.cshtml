@@ -1,0 +1,83 @@
+﻿@{
+	ViewData["Title"] = "OurTeam";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	// تخزين بيانات أعضاء الفريق في Array
+	var teamMembers = new[]
+	{
+		new { Name = "Mohammad Al-shorman", Title = "CEO", SocialLinks = new[] { "facebook", "github", "linkedin" } },
+				new { Name = "Suleiman Khashashneh ", Title = "DevOps Engineer", SocialLinks = new[] { "facebook", "github", "linkedin" } },
+		new { Name = "Ahmad bani younes", Title = "Software Engineer", SocialLinks = new[] { "facebook", "github", "linkedin" } },
+
+		new { Name = "Anas Al-Malkawy", Title = "Full Stack Developer", SocialLinks = new[] { "facebook", "github", "linkedin" } },
+					new { Name = "Sura Hailat", Title = "Financial Manager", SocialLinks = new[]{ "facebook", "github", "linkedin" } },
+
+		new { Name = "Nada Kdesat ", Title = "Full Stack Developer", SocialLinks = new[] { "facebook", "github", "linkedin" } },
+
+		new { Name = "Toqa Khashashneh", Title = "Technical Lead ", SocialLinks = new[] { "facebook", "github", "linkedin" } }
+	};
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<section class="page_title ls s-py-50 corner-title ls invise overflow-visible" >
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h1>Team</h1>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">
+						<a href="#">Pages</a>
+					</li>
+					<li class="breadcrumb-item active">
+						Team
+					</li>
+				</ol>
+				<div class="divider-15 d-none d-xl-block"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ls s-pt-75 s-pb-100 s-pb-lg-130 team">
+	<div class="divider-40 d-none d-xl-block"></div>
+	<div class="container">
+		<div class="row c-mb-30 ">
+			@for (int i = 0; i < teamMembers.Length; i++)
+			{
+				<div class="col-md-6 col-lg-4">
+					<div class="vertical-item ls ms content-padding text-center">
+						<div class="item-media">
+						</div>
+						<div class="item-content">
+							<h6>
+								<a href="">@teamMembers[i].Name</a>
+							</h6>
+
+							<p class="small-text color-main">
+								@teamMembers[i].Title
+							</p>
+
+							<p class="social-icons">
+								@foreach (var social in teamMembers[i].SocialLinks)
+								{
+									<a href="#" class="fa fa-@social color-icon bg-icon rounded-icon" title="@social"></a>
+								}
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>
+
+

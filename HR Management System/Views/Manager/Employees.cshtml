@@ -1,0 +1,176 @@
+﻿@model List<Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/Manger.cshtml";
+
+    var lastEvaluations = ViewBag.LastEvaluations as Dictionary<int, HR_Management_System.Models.Evaluation>;
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2><i class="fas fa-users"></i> Employees List</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th><i class="fas fa-user"></i> Name</th>
+                        <th><i class="fas fa-envelope"></i> Email</th>
+                        <th><i class="fas fa-briefcase"></i> Department</th>
+                        <th><i class="fas fa-star"></i> Last Evaluation</th>
+                        <th><i class="fas fa-cogs"></i> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model)
+                    {
+                        <tr>
+                            <td>@employee.Name</td>
+                            <td>@employee.Email</td>
+                            <td>@(employee.Department != null ? employee.Department.Name : "No Department")</td>
+                            <td>
+                                @if (lastEvaluations != null && lastEvaluations.ContainsKey(employee.Id))
+                                {
+                                    var evaluation = lastEvaluations[employee.Id];
+                                    <span class="badge bg-success p-2">@evaluation.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary p-2">No evaluation</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="@Url.Action("ViewTasks", "Manager", new { id = employee.Id })" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-tasks"></i> Tasks
+                                    </a>
+                                    <a href="@Url.Action("ViewAttendance", "Manager", new { id = employee.Id })" class="btn btn-info btn-sm">
+                                        <i class="fas fa-calendar-check"></i> Attendance
+                                    </a>
+                                    <a href="@Url.Action("EditEmployee", "Manager", new { id = employee.Id })" class="btn btn-warning btn-sm text-white">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="@Url.Action("AssignTask", "Manager", new { id = employee.Id, name = employee.Name })" class="btn btn-dark btn-sm">
+                                        <i class="fas fa-tasks"></i> Assign Task
+                                    </a>
+                                    <a href="@Url.Action("ReviewLeaves", "Manager", new { id = employee.Id, name = employee.Name })"
+                                       class="btn btn-primary position-relative">
+                                        <i class="fas fa-file-alt"></i> Leaves
+                                        @if (ViewBag.PendingLeaves != null && ViewBag.PendingLeaves.ContainsKey(employee.Id) && ViewBag.PendingLeaves[employee.Id] > 0)
+                                        {
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                @ViewBag.PendingLeaves[employee.Id]
+                                            </span>
+                                        }
+                                    </a>
+
+                                    <form method="post" asp-action="DeleteEmployee" class="d-inline delete-form">
+                                        <input type="hidden" name="id" value="@employee.Id" />
+                                        <button type="button"
+                                                class="btn btn-danger btn-sm btn-custom delete-employee"
+                                                style="display: flex; align-items: center; gap: 5px; background-color: #dc3545; color: white; padding: 6px 12px; border-radius: 5px; font-size: 14px; border: none; cursor: pointer; transition: transform 0.3s;"
+                                                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-center">
+            <a href="@Url.Action("AddEmployee", "Manager")" class="btn btn-success">
+                <i class="fas fa-user-plus"></i> Add New Employee
+            </a>
+            <a href="@Url.Action("EvaluateEmployee", "Manager")" class="btn btn-secondary">
+                <i class="fas fa-star-half-alt"></i> Evaluate Employee
+            </a>
+            <a href="@Url.Action("DownloadEmployeeReport", "Manager")" class="btn btn-danger">
+                <i class="fas fa-file-pdf"></i> Download PDF Report
+            </a>
+
+            <a href="@Url.Action("ExportEmployeeData", "Manager")" class="btn btn-dark">
+                <i class="fas fa-download"></i> Export Data For Excel
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".delete-employee");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                const form = this.closest("form");
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "Cancel",
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "The employee has been deleted.",
+                            icon: "success",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        @ViewBag.SuccessMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        @ViewBag.ErrorMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<script>
+    setTimeout(function () {
+        var successAlert = document.getElementById("successMessage");
+        var errorAlert = document.getElementById("errorMessage");
+
+        if (successAlert) {
+            successAlert.style.transition = "opacity 0.5s";
+            successAlert.style.opacity = "0";
+            setTimeout(() => successAlert.remove(), 500);
+        }
+
+        if (errorAlert) {
+            errorAlert.style.transition = "opacity 0.5s";
+            errorAlert.style.opacity = "0";
+            setTimeout(() => errorAlert.remove(), 500);
+        }
+    }, 3000);
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

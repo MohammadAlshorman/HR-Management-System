@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DotCreative</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/EmployeesLayout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HR_Management_System.styles.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/img/logo2.png" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    @RenderSection("Style", required: false)
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="d-flex">
+            <!-- Sidebar -->
+            <nav class="sidebar" id="sidebar">
+                <div>
+                    <button class="close-sidebar" type="button" data-bs-dismiss="sidebar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <img src="~/img/logo.png" alt="logo" class="logo" />
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")"
+                               asp-area="" asp-controller="Manager" asp-action="Dashboard">
+								<img src="~/img/menu.png" alt="Dashboard" class="icon" />Dashboard Manager
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Employees" ? "active" : "")"
+                               asp-area="" asp-controller="Manager" asp-action="Employees">
+                                <img src="~/img/user.png" alt="Tasks" class="icon" /> Employees
+                            </a>
+                        </li>
+
+                    @*     <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "CreateManeger" ? "active" : "")"
+                               asp-area="" asp-controller="HR" asp-action="CreateManeger">
+                                <img src="~/img/menu.png" alt="Attendance" class="icon" />Create Maneger
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ViewManager" ? "active" : "")"
+                               asp-area="" asp-controller="HR" asp-action="ViewManager">
+                                <img src="~/img/user.png" alt="Request Vacation" class="icon" />View Manager
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ViewEmployee" ? "active" : "")"
+                               asp-area="" asp-controller="HR" asp-action="ViewEmployee">
+                                <img src="~/img/user.png" alt="Request Leave" class="icon" />View Employee
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ViewEvaluation" ? "active" : "")"
+                               asp-area="" asp-controller="HR" asp-action="ViewEvaluation">
+                                <img src="~/img/user.png" alt="Request Vacation" class="icon" /> View Evaluation
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ViewFeedback" ? "active" : "")"
+                               asp-area="" asp-controller="HR" asp-action="ViewFeedback">
+                                <img src="~/img/user.png" alt="Request Vacation" class="icon" /> View Feedback
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ViewVaccation" ? "active" : "")"
+                               asp-area="" asp-controller="HR" asp-action="ViewVaccation">
+                                <img src="~/img/logout.png" alt="Request Vacation" class="icon" />View Vaccation
+                            </a>
+                        </li> *@
+                    </ul>
+                </div>
+                <footer class="sidebar-footer">
+                    <p>DotCreative <br> All rights reserved</p>
+                </footer>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Topbar with Hamburger Menu -->
+                <header class="topbar">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+                        <span class="navbar-toggler-icon">☰</span>
+                    </button>
+                    <div class="user-menu">
+                        <div class="user-profile">
+
+                            <img src="~/img/@Context.Session.GetString("ProfileImage")" alt="User">
+                            <span>@Context.Session.GetString("Name") <small>Employee</small></span>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <i class="fas fa-user icon text-black"></i>
+                                        <a class="dropdown-item" asp-controller="User" asp-action="Profile" asp-route-id="@Model.?Id">Profile</a>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-sign-out-alt icon text-danger"></i>
+                                        <a class="dropdown-item text-danger" asp-controller="Home" asp-action="Accounts">Sign out</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Content Area -->
+                <main class="content">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.querySelector('.close-sidebar').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('show');
+        });
+            $(window).on('resize', function() {
+            if ($(window).width() >= 768) {
+                $('#sidebar').addClass('show');
+            } else {
+                $('#sidebar').removeClass('show');
+            }
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

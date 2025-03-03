@@ -1,0 +1,120 @@
+﻿@model IEnumerable<HR_Management_System.Models.Task>
+
+@{
+    ViewData["Title"] = "My Tasks";
+    Layout = "_EmployeeLayout";
+}
+
+<h1 style="    margin-left: 28px;"> My Tasks</h1>
+
+
+@* <form id="searchForm" method="get" action="@Url.Action("Task", "Employee")">
+    <input type="text" id="searchInput" name="query" placeholder="Search tasks...">
+    <button id="voiceSearchBtn" type="button">🎤</button>
+</form> *@
+<form id="searchForm" method="get" action="@Url.Action("EmployeesTasks", "Employees")">
+    <input type="text" id="searchInput" name="query" placeholder="Search tasks...">
+    <button id="voiceSearchBtn" type="button">🎤</button>
+</form>
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center">You have no tasks assigned.</div>
+}
+else
+{
+    <div class="table-responsive" style="margin-left:59px ;    margin-right: 32px;
+">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>Due Date</th>
+                    <th>Assign Date</th>
+                    <th>Status</th>
+                    
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in Model)
+                {
+                 
+
+                    <tr>
+                        <td>@task.Title</td>
+                        <td>@task.Description</td>
+                        <td>@task.StartDate</td>
+                        <td>@task.DueDate</td>
+                        <td>@(task.CreatedAt?.ToShortDateString() ?? "N/A")</td>
+                        
+                        <td>
+                            <span class="badge
+                                @(task.Status == "To Do" ? "bg-warning text-dark" :
+                                  task.Status == "Doing" ? "bg-primary" : "bg-success")">
+                                @task.Status
+                            </span>
+                        </td>
+                      
+                        <td>
+                            @if (task.Status == "To Do")
+                            {
+                                <form method="post" asp-action="UpdateStatus">
+                                    <input type="hidden" name="id" value="@task.Id" />
+                                    <input type="hidden" name="status" value="Doing" />
+                                    <button type="submit" class="btn btn-warning btn-sm">Start Task</button>
+                                </form>
+                            }
+                            else if (task.Status == "Doing")
+                            {
+                                <form method="post" asp-action="UpdateStatus">
+                                    <input type="hidden" name="id" value="@task.Id" />
+                                    <input type="hidden" name="status" value="Done" />
+                                    <button type="submit" class="btn btn-success btn-sm">Mark as Done</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const voiceSearchBtn = document.getElementById("voiceSearchBtn");
+        const searchForm = document.getElementById("searchForm");
+
+        // Check if the browser supports Speech Recognition API
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Speech Recognition not supported.");// Show alert if not supported
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = "en-US";
+
+        voiceSearchBtn.onclick = () => recognition.start();
+
+        // Process the recognized speech when the user stops speaking
+        recognition.onresult = (event) => {
+            let transcript = event.results[0][0].transcript.trim().replace(/.$/, "");
+            searchInput.value = transcript;
+            searchForm.submit();
+        };
+
+        // Handle "Enter" keypress in the search input field
+        searchInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                searchForm.submit();
+            }
+        });
+    });
+
+</script>

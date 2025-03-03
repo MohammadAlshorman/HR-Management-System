@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "Testimonials";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var testimonials = new List<dynamic>
+    {
+        new { Image = "https://scontent.famm7-1.fna.fbcdn.net/v/t39.30808-6/327869219_1795845920786246_1382305312813099003_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeE5WkJYEol-sjXRI2Lp7ZkRS2XLMnet1hhLZcsyd63WGBzdXrcGmFBOOaMrRSocfaokpHA-9wcI9VChruy-I5c2&_nc_ohc=Ds3s_6RbYmYQ7kNvgFGqgb2&_nc_oc=AdjAJLMzEeHFz3o-C18aRLDszKZphyt-GamfSoD3i2qUFV2qC-HGQ7De-KRGwa6DsTb6d7ojhdF7vWnE03t9t26S&_nc_zt=23&_nc_ht=scontent.famm7-1.fna&_nc_gid=A8anCKDMn6_x3uevg9aUj89&oh=00_AYAEYRSg4Pgz3bhattE_4OZ0n7crbf4gdkAnRq5WW92aPg&oe=67C91ED4", Name = "Mohammed Frehat", Text = "This guys are awesome! It is hard to find a web design company who can actually listen and understand what you need. I’m 100% satisfied with this guys." },
+        new { Image = "https://media.licdn.com/dms/image/v2/D4D03AQHzTJ-gk_BKOw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1691245063093?e=1746057600&v=beta&t=jJBJmpqhm_QK6XpqzaUnyBo3F1VaEbKApfNKLUoE9tM", Name = "Ayman Al-Jaradat ", Text = "I needed more leads for my services. Pay-per-click, banners or maybe even brochures. They made an analysis of my existing site. It occurred that my website is banned with Google." },
+        new { Image = "https://scontent.famm7-1.fna.fbcdn.net/v/t39.30808-1/465559020_28475317162067588_9001997578535518786_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=110&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeEEkyGVZr8bbCxae92gaKlQtaI0Yrexeom1ojRit7F6iTgJOeh7xFr4DZazcXoCy-7VyVa-w0Vxrd_ELzWy2s_U&_nc_ohc=jD_4UwA488MQ7kNvgEXRa2T&_nc_oc=AdiUEFh0B_5oZDpiDUGjXg_aBTAoGfKzZZ3BcsiBjYWuLTi-_OOpLESceInE9dfHPoxZdGJvcygZCF7_o79xBHux&_nc_zt=24&_nc_ht=scontent.famm7-1.fna&_nc_gid=A_sGL4XQxNSl-WPJgOBE4UZ&oh=00_AYAjgqOD0PWNz1xl6NRVrEcKW7PKBWftkTh_X75wGisVZQ&oe=67C90183", Name = "Amer Abu Al Hayja", Text = "I highly recommend this company for all and any of your design needs. I am very happy with the new redesigned and restructured website they built for my moving company!" },
+        new { Image = "https://media.licdn.com/dms/image/v2/D4E03AQH9z91J2xg64g/profile-displayphoto-shrink_800_800/B4EZUjhkFDHcAc-/0/1740057756432?e=1746057600&v=beta&t=Zm4yqHHVWDX3lH8qLn0ERCmkVkMIuw9Uyq0p9RSEuWI", Name = "Salam Almomani", Text = "This guys are awesome! It is hard to find a web design company who can actually listen and understand what you need. I’m 100% satisfied with this guys." },
+        new { Image = "https://media.licdn.com/dms/image/v2/D4E03AQHPavOJrAlApg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1673085050200?e=1746057600&v=beta&t=kF7m8v_L8mOQrV0a6xNx3TgkfKuXm8mrfVUDRcdmKZA", Name = "Batool Walid ", Text = "I needed more leads for my services. Pay-per-click, banners or maybe even brochures. They made an analysis of my existing site. It occurred that my website is banned with Google." },
+    };
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<section class="page_title ls s-py-50 corner-title ls invise overflow-visible">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h1>Testimonials</h1>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">
+						<a href="#">Pages</a>
+					</li>
+					<li class="breadcrumb-item active">
+						Testimonials
+					</li>
+				</ol>
+				<div class="divider-15 d-none d-xl-block"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+<section class="ls s-pt-20 s-pb-130 s-pb-lg-100 testimonials-page">
+    <div class="container">
+        <div class="divider-75 d-none d-xl-block"></div>
+        <div class="row c-mb-lg-30 c-gutter-60">
+            @foreach (var testimonial in testimonials)
+            {
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <div class="testimonials-item">
+                            <img src="@testimonial.Image" alt="@testimonial.Name">
+                        </div>
+                        <h6>@testimonial.Name</h6>
+                        <p>@testimonial.Text</p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="divider-70 d-none d-xl-block"></div>
+    </div>
+</section>
+

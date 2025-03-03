@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "Accounts";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Options</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* تنسيق الصفحة العامة */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0000001a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* تصميم البطاقة */
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 320px;
+            text-align: center;
+            transition: 0.3s;
+            padding-bottom: 20px;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            }
+
+            .card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-bottom: 3px solid #0427C1;
+                
+            }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* زر تسجيل الدخول */
+        .login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-hr {
+            background: #0427C1;
+        }
+
+        .btn-managers {
+            background: #0427C1;
+        }
+
+        .btn-employees {
+            background: #0427C1;
+        }
+
+        /* تأثير hover */
+        .login-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-btn i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- بطاقة HR -->
+        <div class="card">
+            <img src="https://img.freepik.com/premium-vector/hr-department-human-resources-management-employer-hiring-candidatesrecruitment-agency-employment_501813-922.jpg" alt="HR">
+            <div class="card-content">
+                <h3>HR Login</h3>
+                <p>Access HR management and employee details.</p>
+                <a href="@Url.Action("HRLogin", "HOME")" class="login-btn btn-hr">
+                    <i class="fas fa-user-tie"></i> Login
+                </a>
+            </div>
+        </div>
+
+        <!-- بطاقة Managers -->
+        <div class="card">
+            <img src="https://th.bing.com/th/id/OIP.tBItoHYkcMybMANVvCjz6gAAAA?w=460&h=444&rs=1&pid=ImgDetMain" alt="Managers">
+            <div class="card-content">
+                <h3>Managers Login</h3>
+                <p>Manage teams and oversee operations.</p>
+                <a href="@Url.Action("ManagersLogin", "HOME")" class="login-btn btn-managers">
+                    <i class="fas fa-user-cog"></i> Login
+                </a>
+            </div>
+        </div>
+
+        <!-- بطاقة Employees -->
+        <div class="card">
+            <img src="https://img.freepik.com/premium-vector/engaging-employees-through-visual-representation-concepts-statistics_1263357-34976.jpg" alt="Employees">
+            <div class="card-content">
+                <h3>Employees Login</h3>
+                <p>Access work schedules and personal info.</p>
+                <a href="@Url.Action("EmployeesLogin", "HOME")" class="login-btn btn-employees">
+                    <i class="fas fa-users"></i> Login
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

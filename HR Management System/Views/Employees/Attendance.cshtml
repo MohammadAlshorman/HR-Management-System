@@ -1,0 +1,93 @@
+﻿@model IEnumerable<HR_Management_System.Models.Attendance>
+@{
+    Layout = "_EmployeeLayout";
+    ViewData["Title"] = "Attendance";
+}
+@section Style {
+    <link href="~/css/Attendance.css" rel="stylesheet" asp-append-version="true" />
+}
+<div class="flex">
+    <h1>My Attendance</h1>
+    <form method="post" asp-action="PunchIn_PunchOut">
+        @{
+            var lastPunch = Model.LastOrDefault();
+            bool hasPunchedInToday = lastPunch != null && lastPunch.Date == DateOnly.FromDateTime(DateTime.Now);
+            bool hasPunchedOut = hasPunchedInToday && lastPunch.PunchOutTime != null;
+        }
+
+        <button type="submit" id="punchButton" class="btn @(hasPunchedInToday && !hasPunchedOut ? "btn-warning" : "btn-primary")"
+        @(hasPunchedOut ? "disabled" : "")>
+            @(hasPunchedInToday && !hasPunchedOut ? "Punch Out" : "Punch In")
+        </button>
+    </form>
+</div>
+
+<table class="table" border="1">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.PunchInTime)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.PunchOutTime)
+            </th>
+            <th scope="col">
+                Working Hours
+            </th>
+            <th scope="col">
+                Overtime hours
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PunchInTime)
+                </td>
+                <td>
+                    @(item.PunchOutTime.HasValue ? item.PunchOutTime.Value.ToString() : "--")
+                </td>
+                <td>
+                    @if (item.PunchOutTime.HasValue)
+                    {
+                        var punchIn = DateTime.Today.Add(item.PunchInTime.ToTimeSpan());
+                        var punchOut = DateTime.Today.Add(item.PunchOutTime.Value.ToTimeSpan());
+                        var workingTime = punchOut - punchIn;
+                        @($"{workingTime.Hours}h {workingTime.Minutes}m")
+                    }
+                    else
+                    {
+                        <span>--</span>
+                    }
+                </td>
+                <td>
+                    @if (item.PunchOutTime.HasValue)
+                    {
+                        var punchIn = DateTime.Today.Add(item.PunchInTime.ToTimeSpan());
+                        var punchOut = DateTime.Today.Add(item.PunchOutTime.Value.ToTimeSpan());
+                        var workingTime = punchOut - punchIn;
+
+                        var overtime = workingTime.TotalHours > 8 ? workingTime.TotalHours - 8 : 0;
+                        @(overtime > 0 ? $"{Math.Floor(overtime)}h {((overtime - Math.Floor(overtime)) * 60):0}m" : "--")
+                    }
+                    else
+                    {
+                        <span>--</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/Attendance.js" asp-append-version="true"></script>
+}

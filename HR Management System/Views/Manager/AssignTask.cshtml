@@ -1,0 +1,67 @@
+﻿@model HR_Management_System.Models.Task
+
+@{
+    ViewData["Title"] = "Assign Task";
+    Layout = "~/Views/Shared/Manger.cshtml";
+
+    var employeeId = ViewBag.EmployeeId;
+    var employeeName = ViewBag.EmployeeName;
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2><i class="fas fa-tasks"></i> Assign Task</h2>
+        </div>
+        <div class="card-body">
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger text-center">
+                    <i class="fas fa-exclamation-circle"></i> @ViewBag.ErrorMessage
+                </div>
+            }
+
+            <form asp-action="AssignTask" method="post" class="p-3">
+                <input type="hidden" asp-for="AssignedToEmployeeId" value="@employeeId" />
+                <input type="hidden" asp-for="Status" value="Doing" />
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold"><i class="fas fa-user"></i> Employee Name</label>
+                    <input type="text" class="form-control border-primary shadow-sm" value="@employeeName" disabled />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold"><i class="fas fa-heading"></i> Task Title</label>
+                    <input type="text" name="Title" class="form-control border-primary shadow-sm" placeholder="Enter task title..." required />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold"><i class="fas fa-calendar-alt"></i> Start Date</label>
+                        <input type="date" name="StartDate" class="form-control border-primary shadow-sm" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold"><i class="fas fa-calendar-alt"></i> Due Date</label>
+                        <input type="date" name="DueDate" class="form-control border-primary shadow-sm" required />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold"><i class="fas fa-align-left"></i> Description</label>
+                    <textarea name="Description" class="form-control border-primary shadow-sm" rows="3" placeholder="Describe the task..." required></textarea>
+                </div>
+
+               
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="fas fa-paper-plane"></i> Assign Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- تضمين FontAwesome للأيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

@@ -1,0 +1,50 @@
+﻿@model HR_Management_System.Models.Department
+
+@{
+    ViewData["Title"] = "Create Department";
+    Layout = "_LayoutHR";
+}
+<br />
+<br />
+
+<h1 class="text-center" style="color: #FF497C; font-weight: bold; font-size: 2.5rem;">Create Department</h1>
+<h4 class="text-center mb-4" style="color: #FF497C; font-weight: 600;">Department</h4>
+<hr style="border-top: 2px solid #FF497C;" />
+<br />
+<br />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="CreateDepartment" class="shadow-lg p-5 rounded" style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Department Name Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Name" class="control-label" style="color: #FF497C; font-weight: 600;"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Department Name" 
+                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 12px 15px;" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Department Description Field -->
+            <div class="form-group mb-4">
+                <label asp-for="Description" class="control-label" style="color: #FF497C; font-weight: 600;"></label>
+                <input asp-for="Description" class="form-control" placeholder="Enter Description" 
+                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 12px 15px;" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-lg w-100" 
+                       style="background-color: #FF497C; color: white; border-radius: 8px; padding: 12px 0; font-weight: 600; transition: background-color 0.3s ease;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

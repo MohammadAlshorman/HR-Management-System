@@ -1,0 +1,266 @@
+﻿/* Reset Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    padding-left: 0px;
+    padding-right:0px;
+}
+    /* Sidebar */
+.sidebar {
+    width: 270px;
+    min-width: 270px; 
+    max-width: 270px;
+    height: 100vh;
+    background: #1f2732;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    .sidebar .logo {
+        width:140px;
+        margin-bottom: 20px;
+    }
+
+    .sidebar .icon {
+        width: 20px;
+    }
+
+    .sidebar .nav-link {
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        transition: background 0.3s;
+        margin:5px;
+    }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+.sidebar-footer {
+    font-size: 12px;
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    min-height: 100vh;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    margin-left: 270px; /* نفس عرض الـ sidebar */
+    position: relative;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+
+/* Topbar */
+.topbar {
+    background: white;
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+    .user-menu .fa-bell {
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+    .user-profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .user-profile span {
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        color: #1f2732;
+    }
+
+    .user-profile small {
+        font-size: 12px;
+        color: gray;
+    }
+
+/* Dropdown */
+.dropdown {
+/*    margin-top: -0px;*/
+    margin-left: -9px;
+    font-size: 12px;
+}
+
+.dropdown-toggle {
+    background: transparent;
+    border: none;
+}
+
+    .dropdown-toggle::after {
+        content: none;
+    }
+
+.dropdown-menu {
+    overflow-x: hidden; 
+    overflow-y: auto;
+}
+
+    .dropdown-menu li {
+        display: flex;
+        align-items: center;
+        padding:5px;
+    }
+    .dropdown-menu li:hover {
+        background-color:#e9ecef;
+    }
+
+        .dropdown-menu li .icon {
+            margin-left: 7px;
+            font-size: 16px;
+        }
+
+
+.dropdown-item {
+    font-size: 14px;
+}
+
+/* Sidebar styles */
+.sidebar {
+    z-index: 1000;
+    width: 270px;
+    min-width: 270px;
+    max-width: 270px;
+    height: 100vh;
+    background: #1f2732;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+    .sidebar .logo {
+        width: 140px;
+        margin-bottom: 20px;
+    }
+
+    .sidebar .nav-link {
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        transition: background 0.3s;
+        margin: 5px;
+    }
+
+.topbar {
+    background: white;
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    justify-content: end; 
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler {
+    display: none;
+    background: transparent;
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-color: #000; 
+}
+
+.close-sidebar {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 30px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display:none;
+}
+
+    .close-sidebar i {
+        font-size: 20px;
+    }
+
+.navbar-toggler-icon {
+    background-color: #fff;
+    font-size: 30px;
+    margin-top:12px;
+}
+/* Hide sidebar on small screens */
+@media (max-width: 991px) {
+    .sidebar {
+        display: none; /* Hide sidebar by default */
+    }
+
+    .navbar-toggler {
+        display: block; /* Show hamburger button */
+        background-color: white;
+    }
+
+    .sidebar.show {
+        display: block; /* Show sidebar when toggled */
+        position: fixed; /* Ensure it remains in place */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .topbar {
+        justify-content: space-between;
+    }
+
+    .close-sidebar {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0; /* إزالة الفراغ عند إخفاء الـ sidebar */
+    }
+}
+
