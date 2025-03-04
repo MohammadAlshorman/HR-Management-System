@@ -1,0 +1,46 @@
+﻿@model HR_Management_System.Models.Hr
+
+@{
+    ViewData["Title"] = "Update HR Profile";
+    Layout = null;
+}
+
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center bg-info text-white">
+            <h2 class="fw-bold">Update HR Profile</h2>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="UpdateProfileHR" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Name</label>
+                    <input type="text" asp-for="Name" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Email</label>
+                    <input type="email" asp-for="Email" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Address</label>
+                    <input type="text" asp-for="Address" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Profile Image</label>
+                    <input type="file" name="ImageFile" class="form-control" />
+                    @if (!string.IsNullOrEmpty(Model.ProfileImage))
+                    {
+                        <img src="@Model.ProfileImage" class="mt-2 rounded-circle" width="100" height="100" alt="Profile Image" />
+                    }
+                </div>
+
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model Employee
+@{
+    Layout = "_EmployeeLayout";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center bg-primary text-white">
+            <h2 class="fw-bold">Employee Profile</h2>
+        </div>
+        <div class="card-body p-4 text-center">
+            <img src="~/img/@Model.ProfileImage" class="rounded-circle mb-3" width="120" height="120" alt="Profile Image" />
+            <h4 class="fw-bold">@Model.Name</h4>
+            <p><i class="fas fa-envelope"></i> @Model.Email</p>
+            <p><i class="fas fa-building"></i> Department: @Model.Department.Name</p>
+            <p><i class="fas fa-map-marker-alt"></i> Address: @Model.Address</p>
+
+          
+            <a href="@Url.Action("UpdateProfileEmployee", "Home", new { Id = Model.Id })" class="btn btn-primary btn-sm">
+                ✏️ Edit profile
+            </a>
+
+            <a href="/Home/ResetPassword" class="btn btn-danger"><i class="fas fa-lock"></i> Reset Password</a>
+        </div>
+    </div>
+</div>

@@ -61,6 +61,7 @@ namespace HR_Management_System.Controllers
         /// <returns></returns>
         public IActionResult EmpVacRequest()
         {
+
             int? employeeId = HttpContext.Session.GetInt32("EmployeeId");
 
             var Vac = _context.VaccationRequests.Where(v => v.EmployeeId == employeeId).ToList();

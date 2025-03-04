@@ -1,0 +1,56 @@
+﻿@model dynamic
+@{
+    Layout = null;
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center bg-primary text-white">
+            <h2 class="fw-bold">Edit Profile</h2>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="UpdateProfile" enctype="multipart/form-data" method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Name</label>
+                    <input type="text" name="Name" value="@Model.Name" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Email</label>
+                    <input type="email" name="Email" value="@Model.Email" class="form-control" required />
+                </div>
+
+                @if (Model.GetType().GetProperty("Department") != null)
+                {
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Department</label>
+                        <input type="text" name="Department" value="@Model.Department" class="form-control" disabled />
+                    </div>
+                }
+
+                @if (Model.GetType().GetProperty("Position") != null)
+                {
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Position</label>
+                        <input type="text" name="Position" value="@Model.Position" class="form-control" required />
+                    </div>
+                }
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Address</label>
+                    <input type="text" name="Address" value="@Model.Address" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Image</label>
+                    <input type="file" name="ImageFile" value="@Model.Address" class="form-control" required />
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Changes</button>
+                    <a href="/Home/Profile" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

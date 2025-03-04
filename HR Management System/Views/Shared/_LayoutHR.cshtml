@@ -26,6 +26,13 @@
 
                     <ul class="nav flex-column">
                         <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")"
+                               asp-area="" asp-controller="HR" asp-action="Dashboard">
+                                <img src="~/img/menu.png" alt="Dashboard" class="icon" />Dashboard
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "CreateDepartment" ? "active" : "")"
                                asp-area="" asp-controller="HR" asp-action="CreateDepartment">
                                 <img src="~/img/menu.png" alt="Dashboard" class="icon" />Create Department
@@ -102,7 +109,7 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <i class="fas fa-user icon text-black"></i>
-                                        <a class="dropdown-item" asp-controller="User" asp-action="Profile" asp-route-id="@Model.?Id">Profile</a>
+                                        <a class="dropdown-item" asp-controller="Home" asp-action="HRProfile" asp-route-id="@Model.?Id">Profile</a>
                                     </li>
                                     <li>
                                         <i class="fas fa-sign-out-alt icon text-danger"></i>

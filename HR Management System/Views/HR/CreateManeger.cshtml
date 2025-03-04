@@ -8,9 +8,9 @@
 <br />
 
 
-<h1 class="text-center" style="color: #FF497C; font-weight: bold; font-size: 3rem;">Create Manager</h1>
-<h4 class="text-center mb-5" style="color: #FF497C; font-weight: 500;">Please fill in the details below</h4>
-<hr style="border-top: 3px solid #FF497C;" />
+<h1 class="text-center" style="color: #1f2732; font-weight: bold; font-size: 3rem;">Create Manager</h1>
+<h4 class="text-center mb-5" style="color: #1f2732; font-weight: 500;">Please fill in the details below</h4>
+<hr style="border-top: 3px solid #1f2732;" />
 <br />
 <br />
 
@@ -21,56 +21,56 @@
 
             <!-- Name Field -->
             <div class="form-group mb-4">
-                <label asp-for="Name" class="control-label" style="color: #FF497C; font-weight: 600;">Manager's Name</label>
+                <label asp-for="Name" class="control-label" style="color: #1f2732; font-weight: 600;">Manager's Name</label>
                 <input asp-for="Name" class="form-control" placeholder="Enter Manager Name"
-                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                       style="border: 2px solid #1f2732; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <!-- Email Field -->
             <div class="form-group mb-4">
-                <label asp-for="Email" class="control-label" style="color: #FF497C; font-weight: 600;">Email Address</label>
+                <label asp-for="Email" class="control-label" style="color: #1f2732; font-weight: 600;">Email Address</label>
                 <input asp-for="Email" class="form-control" placeholder="Enter Email"
-                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                       style="border: 2px solid #1f2732; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <!-- Password Field -->
             <div class="form-group mb-4">
-                <label asp-for="PasswordHash" class="control-label" style="color: #FF497C; font-weight: 600;">Password</label>
+                <label asp-for="PasswordHash" class="control-label" style="color: #1f2732; font-weight: 600;">Password</label>
                 <input type="password" asp-for="PasswordHash" class="form-control" placeholder="Enter Password"
-                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                       style="border: 2px solid #1f2732; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
                 <span asp-validation-for="PasswordHash" class="text-danger"></span>
             </div>
 
             <!-- Profile Image Field -->
             <div class="form-group mb-4">
-                <label asp-for="ProfileImage" class="control-label" style="color: #FF497C; font-weight: 600;">Profile Image</label>
+                <label asp-for="ProfileImage" class="control-label" style="color: #1f2732; font-weight: 600;">Profile Image</label>
                 <input asp-for="ProfileImage" class="form-control" placeholder="Upload Profile Image"
-                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                       style="border: 2px solid #1f2732; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
                 <span asp-validation-for="ProfileImage" class="text-danger"></span>
             </div>
 
             <!-- Address Field -->
             <div class="form-group mb-4">
-                <label asp-for="Address" class="control-label" style="color: #FF497C; font-weight: 600;">Address</label>
+                <label asp-for="Address" class="control-label" style="color: #1f2732; font-weight: 600;">Address</label>
                 <input asp-for="Address" class="form-control" placeholder="Enter Manager's Address"
-                       style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
+                       style="border: 2px solid #1f2732; border-radius: 8px; padding: 14px 18px; transition: all 0.3s ease;" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
 
             <!-- Department Dropdown -->
             <div class="form-group mb-4">
-                <label asp-for="Department" class="control-label" style="color: #FF497C; font-weight: 600;">Department</label>
+                <label asp-for="Department" class="control-label" style="color: #1f2732; font-weight: 600;">Department</label>
                 <select asp-for="Department" class="form-control" name="Dep" asp-items="ViewBag.Department"
-                        style="border: 2px solid #FF497C; border-radius: 8px; padding: 14px 18px;">
+                        style="border: 2px solid #1f2732; border-radius: 8px; padding: 14px 18px;">
                 </select>
             </div>
 
             <!-- Submit Button -->
             <div class="form-group mt-4">
                 <input type="submit" value="Create" class="btn btn-lg w-100"
-                       style="background-color: #FF497C; color: white; border-radius: 8px; padding: 14px 0; font-weight: 600; transition: background-color 0.3s ease;" />
+                       style="background-color: #1f2732; color: white; border-radius: 8px; padding: 14px 0; font-weight: 600; transition: background-color 0.3s ease;" />
             </div>
         </form>
     </div>

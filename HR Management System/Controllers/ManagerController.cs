@@ -154,10 +154,19 @@ namespace ManagerDashbord.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(Employee employee)
+        //public async Task<IActionResult> AddEmployee(Employee employee)
+
+                    public async Task<IActionResult> AddEmployee(Employee employee, IFormFile ImageFile)
+
+
         {
             try
             {
+
+                //if (string.IsNullOrEmpty(employee.PasswordHash))
+                //{
+                //    employee.PasswordHash = BCrypt.Net.BCrypt.HashPassword("Mohammad2002");
+                //}
 
                 if (string.IsNullOrEmpty(employee.PasswordHash))
                 {
@@ -165,10 +174,31 @@ namespace ManagerDashbord.Controllers
                 }
 
 
+                if (ImageFile != null)
+                {
+                    string fileName = Path.GetFileName(ImageFile.FileName);
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        ImageFile.CopyTo(stream);
+                    }
+
+                    employee.ProfileImage = fileName;
+                }
+
+
                 employee.Position = string.IsNullOrEmpty(employee.Position) ? "Employee" : employee.Position;
                 employee.ProfileImage = string.IsNullOrEmpty(employee.ProfileImage) ? "default.jpg" : employee.ProfileImage;
                 employee.Address = string.IsNullOrEmpty(employee.Address) ? "Not Provided" : employee.Address;
                 employee.CreatedAt = DateTime.Now;
+
+
+                ////employee.ProfileImage = employee.ProfileImage ?? "default.jpg"; // إذا كانت null سيتم تعيين default.jpg
+                //employee.Position = string.IsNullOrEmpty(employee.Position) ? "Employee" : employee.Position;
+                //employee.ProfileImage = string.IsNullOrEmpty(employee.ProfileImage) ? "default.jpg" : employee.ProfileImage;
+                //employee.Address = string.IsNullOrEmpty(employee.Address) ? "Not Provided" : employee.Address;
+                //employee.CreatedAt = DateTime.Now;
 
 
                 _context.Employees.Add(employee);

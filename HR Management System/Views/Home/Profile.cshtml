@@ -1,0 +1,21 @@
+﻿
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center bg-primary text-white">
+            <h2 class="fw-bold">My Profile</h2>
+        </div>
+        <div class="card-body p-4 text-center">
+            <img src="@ViewBag.EmpImg" class="rounded-circle mb-3" width="120" height="120" alt="Profile Image" />
+            <h4 class="fw-bold">@ViewBag.EmpName</h4>
+            <p><i class="fas fa-envelope"></i> @ViewBag.EmpEmail</p>
+
+          
+
+            <p><i class="fas fa-map-marker-alt"></i> Address: @ViewBag.EmpAddress</p>
+
+            <a href="/Home/EditProfile" class="btn btn-warning"><i class="fas fa-edit"></i> Edit Profile</a>
+            <a href="/Home/ResetPassword" class="btn btn-danger"><i class="fas fa-lock"></i> Reset Password</a>
+        </div>
+    </div>
+</div>
+
