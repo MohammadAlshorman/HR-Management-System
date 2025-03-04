@@ -31,10 +31,11 @@
             <table class="table table-striped table-hover table-bordered text-center">
                 <thead class="table-dark">
                     <tr>
-                        <th><i class="fas fa-comment"></i> Reason</th>
+                      
                         <th><i class="fas fa-clock"></i> Start Time</th>
                         <th><i class="fas fa-clock"></i> End Time</th>
                         <th><i class="fas fa-info-circle"></i> Status</th>
+                        <th><i class="fas fa-comment"></i> Reason</th>
                         <th><i class="fas fa-cogs"></i> Actions</th>
                     </tr>
                 </thead>
@@ -42,7 +43,6 @@
                     @foreach (var leave in Model)
                     {
                         <tr>
-                            <td>@leave.Reason</td>
                             <td>@leave.StartTime?.ToString("HH:mm")</td>
                             <td>@leave.EndTime?.ToString("HH:mm")</td>
                             <td>
@@ -52,6 +52,8 @@
                                     @leave.Status
                                 </span>
                             </td>
+                            <td>@leave.Reason</td>
+
                             <td>
                                 @if (leave.Status == "Pending")
                                 {

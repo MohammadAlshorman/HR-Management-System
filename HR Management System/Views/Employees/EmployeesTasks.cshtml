@@ -5,17 +5,20 @@
     Layout = "_EmployeeLayout";
 }
 
-<h1 style="    margin-left: 28px;"> My Tasks</h1>
+<h1 style="margin-left: 58px;"> My Tasks</h1>
 
 
 @* <form id="searchForm" method="get" action="@Url.Action("Task", "Employee")">
     <input type="text" id="searchInput" name="query" placeholder="Search tasks...">
     <button id="voiceSearchBtn" type="button">🎤</button>
 </form> *@
+<div style="margin-left: 58px;">
 <form id="searchForm" method="get" action="@Url.Action("EmployeesTasks", "Employees")">
     <input type="text" id="searchInput" name="query" placeholder="Search tasks...">
     <button id="voiceSearchBtn" type="button">🎤</button>
 </form>
+</div>
+<br />
 @if (!Model.Any())
 {
     <div class="alert alert-info text-center">You have no tasks assigned.</div>

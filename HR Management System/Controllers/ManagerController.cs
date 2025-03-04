@@ -156,7 +156,7 @@ namespace ManagerDashbord.Controllers
         [HttpPost]
         //public async Task<IActionResult> AddEmployee(Employee employee)
 
-                    public async Task<IActionResult> AddEmployee(Employee employee, IFormFile ImageFile)
+        public async Task<IActionResult> AddEmployee(Employee employee, IFormFile ImageFile)
 
 
         {
@@ -217,7 +217,7 @@ namespace ManagerDashbord.Controllers
 
 
 
-      
+
 
         [HttpGet]
         public IActionResult AssignTask(int id, string name)
@@ -248,7 +248,7 @@ namespace ManagerDashbord.Controllers
                 Title = Title,
                 Description = Description,
                 AssignedToEmployeeId = task.AssignedToEmployeeId,
-                Status = "Doing",
+                Status = "To Do",
                 StartDate = StartDate,
                 DueDate = DueDate,
                 CreatedAt = DateTime.Now
@@ -290,6 +290,14 @@ namespace ManagerDashbord.Controllers
                 return View(task);
             }
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -343,18 +351,20 @@ namespace ManagerDashbord.Controllers
 
 
 
+
+
         [HttpGet]
         public async Task<IActionResult> EvaluateEmployee()
         {
             var currentYear = DateTime.Now.Year;
 
-           
+
             var evaluatedEmployeeIds = await _context.Evaluations
                 .Where(e => e.DateEvaluate.Value.Year == currentYear)
                 .Select(e => e.EmployeeId)
                 .ToListAsync();
 
-            
+
             var employees = await _context.Employees
                 .Where(emp => !evaluatedEmployeeIds.Contains(emp.Id))
                 .ToListAsync();
@@ -383,7 +393,7 @@ namespace ManagerDashbord.Controllers
 
             int totalScore = Scores.Sum();
 
-           
+
             if (totalScore >= 40)
                 evaluation.Status = "Excellent";
             else if (totalScore >= 30)
@@ -405,7 +415,7 @@ namespace ManagerDashbord.Controllers
 
         public IActionResult DownloadEmployeeReport()
         {
-           // var employees = _context.Employees.ToList();
+            // var employees = _context.Employees.ToList();
 
             var employees = _context.Employees
             .Include(e => e.Department)
@@ -557,6 +567,56 @@ namespace ManagerDashbord.Controllers
 
             return View();
         }
+
+
+
+
+
+        public async Task<IActionResult> ViewVaccation(int id, string name)
+        {
+            var leaveRequests = await _context.VaccationRequests.ToListAsync();
+
+
+            var vacations = await _context.VaccationRequests
+         .Include(v => v.Employee)
+         .Where(v => v.Status == "Pending")
+         .ToListAsync();
+
+
+
+            return View(leaveRequests);
+        }
+
+       
+        public async Task<IActionResult> Approved(int Id)
+        {
+            var vacation = await _context.VaccationRequests.FindAsync(Id);
+            if (vacation != null)
+            {
+                vacation.Status = "Approved";
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Vacation request approved successfully!";
+            }
+            return RedirectToAction("ViewVaccation");
+        }
+
+
+        public async Task<IActionResult> Rejected(int Id)
+        {
+            var vacation = await _context.VaccationRequests.FindAsync(Id);
+            if (vacation != null)
+            {
+                vacation.Status = "Rejected";
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Vacation request Rejected successfully!";
+            }
+            return RedirectToAction("ViewVaccation");
+        }
+
+
+
+
+
 
 
 

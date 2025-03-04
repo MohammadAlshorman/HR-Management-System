@@ -117,7 +117,7 @@ namespace HR_Management_System.Controllers
         {
             // البحث عن موظف HR في قاعدة البيانات
             var hrUser = _context.Hrs.FirstOrDefault(hr => hr.Email == username && hr.PasswordHash == password);
-
+            
             if (hrUser != null)
             {
                 // تخزين معلومات HR في الجلسة
@@ -154,8 +154,8 @@ namespace HR_Management_System.Controllers
                     HttpContext.Session.SetInt32("ManagerId", manager.Id);
                     HttpContext.Session.SetString("ManagerName", manager.Name);
 
-                    //HttpContext.Session.SetString("Role", "Manager");
-                    //HttpContext.Session.SetString("ProfileImage", manager.ProfileImage);
+                    HttpContext.Session.SetString("Role", "Manager");
+                    HttpContext.Session.SetString("ProfileImage", manager.ProfileImage);
 
                     // توجيه المستخدم إلى لوحة التحكم
                     return RedirectToAction("Dashboard", "Manager");
@@ -223,7 +223,7 @@ namespace HR_Management_System.Controllers
                         Response.Cookies.Append("EmployeeName", employee.Name, options);
                     }
 
-                    return RedirectToAction("EmpVacRequest", "Employees");
+                    return RedirectToAction("EmployeeDashboard", "Employees");
                 //}
                 //else
                 //{
